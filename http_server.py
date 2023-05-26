@@ -31,7 +31,7 @@ def handle_client_send(client_socket, client_address):
     if not param:
         age_results = """<h1>Welcome in My Fridge
         <h3>How to use:</h3>http://localhost:8000/YYYY-MM-DD
-        <h3>Example:</h3>http://localhost:8000/2021-12-21
+        <h3>Example:</h3>http://localhost:8000/2001-12-21
         <h4>created by:</h4>Hkraaat
         """
     else:
@@ -59,9 +59,11 @@ Content-Type: text/html charset=UTF-8
 content-length: {body_length}
 
 """
+    """GET / HTTP/1.1
+    """
     response = headers + body
     client_socket.send(response.encode())
-    print(response.encode())
+    # print(response.encode())
     # client_socket.close()
     client_socket.close()
 
