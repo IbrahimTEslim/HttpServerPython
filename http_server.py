@@ -8,11 +8,6 @@ HOST = 'localhost'
 PORT = 8000
 MAX_CLIENTS = 5
 
-# Create a dictionary to hold all connected clients and their usernames
-connected_clients = {}
-username_to_socket = {}
-usernames_set = set()
-
 # Create a socket object
 server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
