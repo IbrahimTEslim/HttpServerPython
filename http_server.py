@@ -62,26 +62,14 @@ content-length: {body_length}
     response = headers + body
     client_socket.send(response.encode())
     print(response.encode())
-    # client_socket.close()
     client_socket.close()
 
-# Function to handle client requests for the list of connected clients
-def list_clients(client_socket):
-    client_list = ""
-    for c in connected_clients.values():
-        client_list += c + "\n"
-    if client_list == "":
-        client_socket.send(client_list.encode())
 
 
 # Main loop to handle incoming connections
 while True:
     # Accept incoming connections
     client_socket, client_address = server_socket.accept()
-
-    # Create a new thread to handle client requests for the list of connected clients
-    list_thread = threading.Thread(target=list_clients, args=(client_socket,))
-    list_thread.start()
 
     # Create a new thread to handle the client connection
     client_thread_send = threading.Thread(
