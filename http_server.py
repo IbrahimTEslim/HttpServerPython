@@ -24,10 +24,74 @@ def handle_client_send(client_socket, client_address):
     http_anatomical = HttpAnatomical(request)
     param = http_anatomical.get_query_param()
     if not param:
-        age_results = """<h1>Welcome in My Fridge
-        <h3>How to use:</h3>http://localhost:8000/YYYY-MM-DD
-        <h3>Example:</h3>http://localhost:8000/2021-12-21
-        <h4>created by:</h4>Hkraaat
+        age_results = """
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Welcome to our page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            text-align: center;
+            max-width: 500px;
+            padding: 40px;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-radius: 4px;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        h3 {
+            color: #333;
+            margin-top: 30px;
+            margin-bottom: 10px;
+        }
+
+        h4 {
+            color: #333;
+            margin-top: 10px;
+        }
+
+        a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Welcome to our page</h1>
+        <h3>How to use:</h3>
+        <p>http://localhost:8000/YYYY-MM-DD</p>
+        <h3>Example:</h3>
+        <p>For example, you can visit:</p>
+        <pre><a href="http://localhost:8000/2001-12-21">http://localhost:8000/2001-12-21</a></pre>
+        <h3>Created by:</h3>
+        <p>Hkraaat</p>
+    </div>
+</body>
+
+</html>
         """
     else:
         try:
@@ -38,11 +102,58 @@ def handle_client_send(client_socket, client_address):
             age_in_hours = age_in_minutes / 60
             age_in_days = age_in_hours / 24
             age_results = f"""
-    <h1>Results</h1>
-    <h3>Age in Seconds</h3> = {age_in_seconds}
-    <h3>Age in Minutes</h3> = {age_in_minutes}
-    <h3>Age in Hours</h3> = {age_in_hours}
-    <h3>Age in Days</h3> = {age_in_days}
+    <!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f1f1f1;
+        }}
+
+        .container {{
+            text-align: center;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }}
+
+        h1 {{
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }}
+
+        h3 {{
+            color: #777;
+            font-size: 18px;
+            margin-top: 10px;
+        }}
+
+        p {{
+            margin: 0;
+        }}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Results</h1>
+        <h3>Age in Seconds</h3>
+        <p>{age_in_seconds}</p>
+        <h3>Age in Minutes</h3>
+        <p>{age_in_minutes}</p>
+        <h3>Age in Hours</h3>
+        <p>{age_in_hours}</p>
+        <h3>Age in Days</h3>
+        <p>{age_in_days}</p>
+    </div>
+</body>
+</html>
+
     """
         except ValueError:
             age_results = "Invalid Date Format!. The valid date format is YYYY-MM-DD."
@@ -71,4 +182,3 @@ while True:
     client_thread_send = threading.Thread(
         target=handle_client_send, args=(client_socket, client_address))
     client_thread_send.start()
-    
