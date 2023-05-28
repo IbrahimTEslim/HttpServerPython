@@ -1,6 +1,6 @@
 import socket
 import threading
-import datetime
+from datetime import datetime
 from http_request_anatomical import HttpAnatomical
 
 # Define constants for the server
@@ -31,8 +31,9 @@ def handle_client_send(client_socket, client_address):
         """
     else:
         try:
-            d = datetime.date.fromisoformat(param)
-            age_in_seconds = (datetime.date.today() - d).total_seconds()
+            start_time = datetime.fromisoformat(param)
+            current_time = datetime.now()
+            age_in_seconds = (current_time - start_time).total_seconds()
             age_in_minutes = age_in_seconds / 60
             age_in_hours = age_in_minutes / 60
             age_in_days = age_in_hours / 24
