@@ -101,7 +101,8 @@ def handle_client_send(client_socket, client_address):
             age_in_minutes = age_in_seconds / 60
             age_in_hours = age_in_minutes / 60
             age_in_days = age_in_hours / 24
-            age_results = f"""
+            age_in_years = age_in_days / 360
+            age_results = f"""  
     <!DOCTYPE html>
 <html>
 <head>
@@ -150,6 +151,8 @@ def handle_client_send(client_socket, client_address):
         <p>{age_in_hours}</p>
         <h3>Age in Days</h3>
         <p>{age_in_days}</p>
+        <h3>Age in Years</h3>
+        <p>{age_in_years}</p>
     </div>
 </body>
 </html>
